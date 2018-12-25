@@ -1,4 +1,4 @@
-import com.sun.tools.xjc.XJCFacade;
+import com.sun.tools.xjc.Driver;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,7 +13,8 @@ public class ConvertXsdToJava {
             for(String dirname : getDirNames()){
                 String inputDir = INPUT_BASE + "/" + dirname;
                 String packageName = "xsd.generated." + dirname;
-                XJCFacade.main(new String[]{inputDir, "-d", OUTPUT_DIR, "-p", packageName});
+                var arguments = new String[]{inputDir, "-d", OUTPUT_DIR, "-p", packageName};
+                Driver.run(arguments, System.out, System.out);
             }
         } catch(Throwable e){
             System.out.println(e);
